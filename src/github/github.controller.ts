@@ -1,5 +1,6 @@
 import { Body, Controller, Headers, Post } from '@nestjs/common';
 import { GithubService } from './github.service';
+import { GithubBody } from 'src/interfaces/github.interface';
 
 @Controller('github')
 export class GithubController {
@@ -8,10 +9,9 @@ export class GithubController {
   @Post()
   webhookHandler(
     @Headers('x-github-event') githubEvent: string,
-    @Body() body: any,
+    @Body() body: GithubBody,
   ) {
-    console.log({ githubEvent });
-
+    this.githubService.notify(githubEvent, body);
     return { githubEvent };
   }
 }
