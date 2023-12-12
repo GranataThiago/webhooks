@@ -10,7 +10,7 @@ export class GithubService {
     const { sender, action, repository } = githubBody;
     const body = {
       content: `${sender.login} just ${action || ''} ${event} to ${
-        repository.url
+        repository.html_url
       }`,
     };
 
